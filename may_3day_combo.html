@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>五月三連爆｜武財神聖誕 × 雙天赦日</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --gold:#C9A84C;
+  --bright-gold:#FFD700;
+  --red:#C0392B;
+  --dark:#0A0500;
+  --darker:#060300;
+  --orange:#E8700A;
+  --cream:#FFF8E7;
+}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--darker);
+  color:var(--cream);
+  font-family:'Noto Serif TC',serif;
+  overflow-x:hidden;
+}
+
+/* 星火背景 */
+body::before{
+  content:'';
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(255,140,0,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 60%, rgba(192,57,43,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 90%, rgba(201,168,76,0.06) 0%, transparent 50%);
+}
+
+/* 進度條 */
+#prog{position:fixed;top:0;left:0;z-index:1000;height:3px;width:0%;background:linear-gradient(to right,var(--red),var(--bright-gold),var(--orange));}
+
+/* 頂部橫幅 */
+.top-bar{
+  position:fixed;top:3px;left:0;right:0;z-index:999;
+  background:linear-gradient(135deg,var(--red),#8B0000);
+  text-align:center;padding:10px;
+  font-size:12px;letter-spacing:5px;font-weight:700;
+  animation:bar-pulse 2.5s ease-in-out infinite;
+}
+@keyframes bar-pulse{0%,100%{background:linear-gradient(135deg,var(--red),#8B0000);}50%{background:linear-gradient(135deg,#e74c3c,var(--red));}}
+.top-bar span{color:var(--bright-gold);}
+
+/* 浮動CTA */
+.float-btn{
+  position:fixed;bottom:24px;right:20px;z-index:998;
+  background:linear-gradient(135deg,var(--red),var(--orange));
+  color:#fff;padding:14px 20px;
+  font-size:14px;font-weight:700;letter-spacing:2px;
+  border:none;cursor:pointer;
+  font-family:'Noto Serif TC',serif;
+  box-shadow:0 6px 24px rgba(192,57,43,0.6);
+  animation:float-up 3s ease-in-out infinite;
+  transition:transform 0.2s;
+}
+.float-btn:hover{transform:scale(1.05);}
+@keyframes float-up{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
+
+/* 滾動動畫 */
+.reveal{opacity:0;transform:translateY(50px);transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1),transform 0.8s cubic-bezier(0.22,1,0.36,1);}
+.reveal.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:0.1s;}.d2{transition-delay:0.2s;}.d3{transition-delay:0.3s;}.d4{transition-delay:0.4s;}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:80px 24px 60px;text-align:center;position:relative;overflow:hidden;
+}
+.fire-ring{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(ellipse at center,rgba(255,140,0,0.06) 0%,transparent 70%);
+  animation:ring-pulse 4s ease-in-out infinite;pointer-events:none;
+}
+@keyframes ring-pulse{0%,100%{transform:translate(-50%,-50%) scale(1);}50%{transform:translate(-50%,-50%) scale(1.15);}}
+
+.hero-badge{
+  display:inline-block;
+  background:linear-gradient(135deg,var(--red),var(--orange));
+  padding:6px 20px;font-size:12px;letter-spacing:5px;font-weight:700;
+  clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);
+  margin-bottom:28px;
+  animation:badge-in 0.7s 0.2s cubic-bezier(0.22,1,0.36,1) both;
+}
+@keyframes badge-in{from{opacity:0;transform:scale(0.5);}to{opacity:1;transform:scale(1);}}
+
+.hero h1{
+  font-family:'Ma Shan Zheng',serif;
+  font-size:clamp(40px,10vw,80px);
+  line-height:1.15;letter-spacing:4px;
+  background:linear-gradient(135deg,var(--bright-gold),var(--orange),var(--bright-gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:title-in 0.9s 0.4s cubic-bezier(0.22,1,0.36,1) both;
+  margin-bottom:12px;
+}
+@keyframes title-in{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
+
+.hero-sub{
+  font-size:15px;letter-spacing:7px;color:#aaa;
+  border-top:1px solid rgba(255,215,0,0.2);
+  border-bottom:1px solid rgba(255,215,0,0.2);
+  padding:10px 24px;display:inline-block;margin:16px 0 28px;
+  animation:title-in 0.9s 0.6s both;
+}
+
+/* 三日卡片 HERO */
+.date-strip{
+  display:flex;gap:12px;flex-wrap:wrap;justify-content:center;
+  animation:title-in 0.9s 0.8s both;margin-bottom:32px;
+}
+.date-chip{
+  padding:10px 20px;
+  border:1px solid rgba(255,215,0,0.3);
+  background:rgba(255,215,0,0.05);
+  font-size:14px;font-weight:700;letter-spacing:2px;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+}
+.date-chip .dc-date{color:var(--bright-gold);font-size:18px;}
+.date-chip .dc-name{color:#ccc;font-size:12px;letter-spacing:3px;}
+
+.hero-desc{
+  max-width:520px;font-size:16px;line-height:2;color:#ccc;
+  animation:title-in 0.9s 1s both;
+}
+.hero-desc strong{color:var(--bright-gold);}
+
+.scroll-cue{
+  margin-top:40px;font-size:11px;letter-spacing:5px;color:#555;
+  animation:title-in 0.9s 1.2s both,cue-bounce 2.5s 2s ease-in-out infinite;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+}
+@keyframes cue-bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+.scroll-cue::after{content:'▼';font-size:9px;}
+
+/* ── 區塊共用 ── */
+section{padding:70px 24px;max-width:700px;margin:0 auto;}
+.sec-label{
+  font-size:11px;letter-spacing:7px;color:#555;
+  text-align:center;margin-bottom:32px;
+  display:flex;align-items:center;gap:12px;
+}
+.sec-label::before,.sec-label::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(255,215,0,0.2),transparent);}
+
+/* ── 三天說明 ── */
+.days-section{}
+.day-card{
+  border-left:3px solid var(--gold);
+  padding:24px 28px;margin-bottom:20px;
+  background:rgba(255,255,255,0.03);
+  position:relative;
+  transition:transform 0.3s,background 0.3s;
+}
+.day-card:hover{transform:translateX(6px);background:rgba(255,215,0,0.05);}
+.day-card.red-border{border-left-color:var(--red);}
+.day-card.orange-border{border-left-color:var(--orange);}
+.day-num{
+  font-family:'Ma Shan Zheng',serif;
+  font-size:48px;color:rgba(255,215,0,0.06);
+  position:absolute;top:10px;right:20px;line-height:1;pointer-events:none;
+}
+.day-date{font-size:13px;letter-spacing:4px;color:var(--gold);margin-bottom:8px;}
+.day-card.red-border .day-date{color:#e74c3c;}
+.day-card.orange-border .day-date{color:var(--orange);}
+.day-title{
+  font-family:'Ma Shan Zheng',serif;
+  font-size:clamp(22px,5vw,32px);margin-bottom:10px;
+}
+.day-body{font-size:15px;line-height:2;color:#aaa;}
+.day-body strong{color:var(--cream);}
+
+/* ── 深色宣言 ── */
+.statement{
+  background:linear-gradient(135deg,#0D0500,#150800);
+  padding:80px 24px;text-align:center;
+  border-top:1px solid rgba(255,215,0,0.1);
+  border-bottom:1px solid rgba(255,215,0,0.1);
+  position:relative;overflow:hidden;
+  max-width:100%;
+}
+.statement::before{
+  content:'旺';
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:'Ma Shan Zheng',serif;font-size:400px;
+  color:rgba(255,215,0,0.02);pointer-events:none;line-height:1;
+}
+.statement-inner{max-width:580px;margin:0 auto;position:relative;z-index:1;}
+.statement-inner p{
+  font-family:'Ma Shan Zheng',serif;
+  font-size:clamp(26px,6vw,46px);
+  line-height:1.8;color:var(--cream);
+}
+.statement-inner p em{color:var(--bright-gold);font-style:normal;}
+.statement-inner .cap{font-size:12px;color:#555;letter-spacing:5px;margin-top:20px;font-family:'Noto Serif TC',serif;}
+
+/* ── 祈福清單 ── */
+.list-section{}
+.list-title{
+  font-family:'Ma Shan Zheng',serif;
+  font-size:clamp(24px,5vw,36px);text-align:center;margin-bottom:28px;
+}
+.list-title em{color:var(--bright-gold);font-style:normal;}
+.prayer-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+}
+@media(max-width:480px){.prayer-grid{grid-template-columns:1fr;}}
+.prayer-item{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 16px;
+  border:1px solid rgba(255,215,0,0.1);
+  background:rgba(255,255,255,0.02);
+  font-size:14px;
+  transition:background 0.2s,border-color 0.2s;
+}
+.prayer-item:hover{background:rgba(255,215,0,0.06);border-color:rgba(255,215,0,0.3);}
+.prayer-item .tag{color:var(--bright-gold);font-size:16px;flex-shrink:0;}
+
+/* ── 倒數 ── */
+.cd-wrap{max-width:700px;margin:0 auto;padding:60px 24px;}
+.cd-box{
+  background:linear-gradient(135deg,var(--red),#8B0000);
+  padding:48px 24px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.cd-box::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(45deg,transparent,transparent 15px,rgba(0,0,0,0.1) 15px,rgba(0,0,0,0.1) 16px);
+}
+.cd-box .label{font-size:11px;letter-spacing:7px;color:rgba(255,255,255,0.6);margin-bottom:16px;position:relative;}
+.cd-box .big{
+  font-family:'Ma Shan Zheng',serif;
+  font-size:clamp(36px,9vw,72px);
+  color:#fff;line-height:1.2;position:relative;
+  animation:cd-shake 5s ease-in-out infinite;
+}
+@keyframes cd-shake{0%,85%,100%{transform:translateX(0);}87%{transform:translateX(-5px);}89%{transform:translateX(5px);}91%{transform:translateX(-3px);}93%{transform:translateX(3px);}}
+.cd-box .big span{color:var(--bright-gold);}
+.cd-box .sub{font-size:13px;color:rgba(255,255,255,0.5);letter-spacing:3px;margin-top:10px;position:relative;}
+.cd-alert{
+  margin-top:20px;padding:12px;
+  border:1px solid rgba(255,255,255,0.3);
+  color:#fff;font-size:14px;letter-spacing:2px;position:relative;
+  animation:cd-flash 2s ease-in-out infinite;
+}
+@keyframes cd-flash{0%,100%{border-color:rgba(255,255,255,0.3);}50%{border-color:rgba(255,255,255,0.8);}}
+
+/* ── 最終CTA ── */
+.cta-section{
+  background:linear-gradient(135deg,#0D0500,#1A0800);
+  padding:80px 24px;text-align:center;
+  border-top:2px solid rgba(255,215,0,0.15);
+  max-width:100%;
+}
+.cta-inner{max-width:580px;margin:0 auto;}
+.cta-ornament{font-size:20px;color:var(--gold);letter-spacing:10px;margin-bottom:20px;}
+.cta-section h2{
+  font-family:'Ma Shan Zheng',serif;
+  font-size:clamp(28px,6vw,46px);line-height:1.6;margin-bottom:20px;
+}
+.cta-section h2 em{color:var(--bright-gold);font-style:normal;}
+.cta-section p{font-size:15px;line-height:2.1;color:#aaa;margin-bottom:32px;}
+.cta-section p strong{color:var(--cream);}
+.cta-btn{
+  display:inline-block;padding:18px 52px;
+  background:linear-gradient(135deg,var(--red),var(--orange));
+  color:#fff;font-size:17px;font-weight:700;letter-spacing:5px;
+  border:none;cursor:pointer;font-family:'Noto Serif TC',serif;
+  box-shadow:0 8px 32px rgba(192,57,43,0.5);
+  animation:btn-glow 2.5s ease-in-out infinite;
+  transition:transform 0.2s;
+}
+.cta-btn:hover{transform:translateY(-4px);}
+@keyframes btn-glow{0%,100%{box-shadow:0 8px 32px rgba(192,57,43,0.5);}50%{box-shadow:0 8px 48px rgba(192,57,43,0.8);}}
+.cta-note{font-size:12px;color:#555;letter-spacing:3px;margin-top:16px;}
+
+/* ── 複製區 ── */
+.copy-section{max-width:700px;margin:0 auto;padding:60px 24px 80px;}
+.copy-box{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);padding:32px;}
+.copy-title{font-size:11px;letter-spacing:6px;color:#555;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.06);margin-bottom:20px;}
+.copy-text{font-size:14px;line-height:2.2;color:#999;white-space:pre-wrap;word-break:break-all;background:rgba(0,0,0,0.2);padding:20px;border:1px dashed rgba(255,255,255,0.08);}
+.copy-btn{
+  display:block;width:100%;margin-top:18px;padding:14px;
+  background:rgba(255,215,0,0.1);color:var(--bright-gold);
+  font-size:14px;font-weight:700;letter-spacing:5px;
+  border:1px solid rgba(255,215,0,0.3);cursor:pointer;
+  font-family:'Noto Serif TC',serif;transition:background 0.2s;
+}
+.copy-btn:hover{background:rgba(255,215,0,0.2);}
+.copy-btn.done{background:rgba(46,125,79,0.3);color:#4caf50;border-color:#4caf50;}
+
+footer{
+  text-align:center;padding:32px 24px;
+  background:var(--darker);color:#333;
+  font-size:11px;letter-spacing:5px;
+  border-top:1px solid rgba(255,215,0,0.08);
+}
+footer span{color:var(--gold);}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+<div class="top-bar">🔥 <span>五月三連爆</span> · 武財神聖誕 × 雙天赦日 · 史上最強開運月 🔥</div>
+<a class="float-btn" href="https://lin.ee/rCl5T6w" target="_blank" style="text-decoration:none;display:inline-block;">📲 立即預約登記</a>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="fire-ring"></div>
+  <div class="hero-badge">🔥 2025年五月限定 · 史上最強套組</div>
+  <h1>五月三連爆<br>史上最強開運月</h1>
+  <p class="hero-sub">武財神聖誕 × 雙天赦日 · 全方位運勢爆發</p>
+  <div class="date-strip">
+    <div class="date-chip"><span class="dc-date">5 / 1</span><span class="dc-name">⚔️ 武財神聖誕</span></div>
+    <div class="date-chip"><span class="dc-date">5 / 4</span><span class="dc-name">🌟 天赦日</span></div>
+    <div class="date-chip"><span class="dc-date">5 / 20</span><span class="dc-name">🌟 天赦日</span></div>
+  </div>
+  <p class="hero-desc">
+    等一下先別滑走！！<br>
+    同一個月，天赦日出現<strong>兩次</strong><br>
+    加上武財神聖誕坐鎮開頭——<br>
+    這個五月，是2025年<strong>能量最爆棚的一個月</strong> 💥
+  </p>
+  <div class="scroll-cue">繼續往下看</div>
+</div>
+
+<!-- 三天說明 -->
+<section class="days-section">
+  <div class="sec-label reveal">三天各司其職，缺一不可</div>
+  <div class="day-card red-border reveal">
+    <div class="day-num">一</div>
+    <div class="day-date">⚔️ 5月1日 · 武財神聖誕</div>
+    <div class="day-title">衝勁翻倍，財路大開</div>
+    <div class="day-body">武財神掌管「拼出來的財」——事業、業績、創業、偏財，祂說旺，沒有不旺的。這天祈求，<strong>拼勁加倍、財路全開</strong>，是整個套組的強力開場。</div>
+  </div>
+  <div class="day-card reveal d1">
+    <div class="day-num">二</div>
+    <div class="day-date">🌟 5月4日 · 天赦日</div>
+    <div class="day-title">清障歸零，全面重來</div>
+    <div class="day-body">老天爺替你清帳的日子。感情的卡、事業的結、財運的堵——<strong>這天，統統歸零重來</strong>。武財神已經幫你開門，天赦日替你掃清路上的石頭。</div>
+  </div>
+  <div class="day-card orange-border reveal d2">
+    <div class="day-num">三</div>
+    <div class="day-date">🌟 5月20日 · 天赦日</div>
+    <div class="day-title">深化紮根，好運長出來</div>
+    <div class="day-body">同月第二次天赦——極為罕見。第一次清障，第二次<strong>深化紮根</strong>。讓財氣、桃花、事業運一層一層穩穩長出來，種下的好運種子正式發芽 🌱</div>
+  </div>
+</section>
+
+<!-- 宣言 -->
+<div class="statement">
+  <div class="statement-inner reveal">
+    <p>開頭衝，<em>武財神開路</em></p>
+    <p>中間清，<em>天赦掃障礙</em></p>
+    <p>後段旺，<em>深化紮根長出來</em></p>
+    <p class="cap">三天連做 · 全方位運勢爆發</p>
+  </div>
+</div>
+
+<!-- 祈福清單 -->
+<section class="list-section">
+  <div class="sec-label reveal">三天套組啟動項目</div>
+  <p class="list-title reveal">全方位<em>開運祈福</em>清單</p>
+  <div class="prayer-grid">
+    <div class="prayer-item reveal d1"><span class="tag">🔖</span>財運爆發 · 日進斗金</div>
+    <div class="prayer-item reveal d2"><span class="tag">🔖</span>事業順遂 · 業績長紅</div>
+    <div class="prayer-item reveal d3"><span class="tag">🔖</span>創業補財庫 · 月月高業績</div>
+    <div class="prayer-item reveal d4"><span class="tag">🔖</span>感情和合 · 桃花引動</div>
+    <div class="prayer-item reveal d1"><span class="tag">🔖</span>小人遠離 · 貴人相助</div>
+    <div class="prayer-item reveal d2"><span class="tag">🔖</span>化解阻礙 · 開運轉運</div>
+    <div class="prayer-item reveal d3"><span class="tag">🔖</span>身體健康 · 家運亨通</div>
+    <div class="prayer-item reveal d4"><span class="tag">🔖</span>心想事成 · 願望成真</div>
+    <div class="prayer-item reveal d1"><span class="tag">🔖</span>官司化解 · 圓滿順利</div>
+    <div class="prayer-item reveal d2"><span class="tag">🔖</span>迴向佈施 · 阻礙全消</div>
+  </div>
+</section>
+
+<!-- 倒數緊迫 -->
+<div class="cd-wrap">
+  <div class="sec-label reveal">時間警示</div>
+  <div class="cd-box reveal">
+    <p class="label">距離五月開運月</p>
+    <div class="big"><span>5/1</span> 就要來了</div>
+    <p class="sub">錯過這個月 · 2025年最強套組就沒了</p>
+    <div class="cd-alert">⚠ 名額有限 · 三天套組從速預約</div>
+  </div>
+</div>
+
+<!-- 最終CTA -->
+<div class="cta-section" id="cta">
+  <div class="cta-inner reveal">
+    <p class="cta-ornament">✦ ✦ ✦</p>
+    <h2>三天連做<br><em>開頭衝、中間清、後段旺</em><br>這個組合是我做了這麼多年<br><em>最強的月份配置</em></h2>
+    <p>
+      不是每個人都知道怎麼借力這三天。<br>
+      財運、感情、事業——你的命盤，需要的鑰匙不一樣。<br><br>
+      <strong>今天留言，讓老師幫你精準開運。</strong><br>
+      需事先準備香品 ＆ 書寫祈福文，<strong>請提早預約登記</strong>。<br>
+      不知道自己五行屬性？留言問老師 🙏
+    </p>
+    <a class="cta-btn" href="https://lin.ee/rCl5T6w" target="_blank">📲 立即預約登記</a>
+    <p class="cta-note">⚑ 名額有限 · 點擊直接進入官方LINE</p>
+  </div>
+</div>
+
+<footer><span>✦</span> 五月三連爆 · 武財神聖誕 × 雙天赦日 · 2025 <span>✦</span></footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  const p=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100;
+  document.getElementById('prog').style.width=p+'%';
+});
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}}),{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
