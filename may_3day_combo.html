@@ -111,6 +111,29 @@ body::before{
   animation:title-in 0.9s 0.6s both;
 }
 
+/* 影片區塊樣式 */
+.video-section {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+    padding: 0 24px;
+}
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 20px rgba(201, 168, 76, 0.2);
+}
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
 /* 三日卡片 HERO */
 .date-strip{
   display:flex;gap:12px;flex-wrap:wrap;justify-content:center;
@@ -310,7 +333,6 @@ footer span{color:var(--gold);}
 <div class="top-bar">🔥 <span>五月三連爆</span> · 武財神聖誕 × 雙天赦日 · 史上最強開運月 🔥</div>
 <a class="float-btn" href="https://lin.ee/rCl5T6w" target="_blank" style="text-decoration:none;display:inline-block;">📲 立即預約登記</a>
 
-<!-- HERO -->
 <div class="hero">
   <div class="fire-ring"></div>
   <div class="hero-badge">🔥 2025年五月限定 · 史上最強套組</div>
@@ -330,7 +352,19 @@ footer span{color:var(--gold);}
   <div class="scroll-cue">繼續往下看</div>
 </div>
 
-<!-- 三天說明 -->
+<div class="video-section reveal">
+    <div class="sec-label">觀看說明影片</div>
+    <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/3mrV8KHwatQ?si=2mYupcZyEU9X3Ztl" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                allowfullscreen>
+        </iframe>
+    </div>
+</div>
+
 <section class="days-section">
   <div class="sec-label reveal">三天各司其職，缺一不可</div>
   <div class="day-card red-border reveal">
@@ -353,7 +387,6 @@ footer span{color:var(--gold);}
   </div>
 </section>
 
-<!-- 宣言 -->
 <div class="statement">
   <div class="statement-inner reveal">
     <p>開頭衝，<em>武財神開路</em></p>
@@ -363,7 +396,6 @@ footer span{color:var(--gold);}
   </div>
 </div>
 
-<!-- 祈福清單 -->
 <section class="list-section">
   <div class="sec-label reveal">三天套組啟動項目</div>
   <p class="list-title reveal">全方位<em>開運祈福</em>清單</p>
@@ -381,7 +413,6 @@ footer span{color:var(--gold);}
   </div>
 </section>
 
-<!-- 倒數緊迫 -->
 <div class="cd-wrap">
   <div class="sec-label reveal">時間警示</div>
   <div class="cd-box reveal">
@@ -392,7 +423,6 @@ footer span{color:var(--gold);}
   </div>
 </div>
 
-<!-- 最終CTA -->
 <div class="cta-section" id="cta">
   <div class="cta-inner reveal">
     <p class="cta-ornament">✦ ✦ ✦</p>
