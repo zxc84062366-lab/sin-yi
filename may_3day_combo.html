@@ -20,14 +20,19 @@ html{scroll-behavior:smooth;}
 body{
   background:var(--darker);
   color:var(--cream);
-  font-family:'Noto Serif TC', serif;
+  font-family:'Noto Serif TC',serif;
   overflow-x:hidden;
-  line-height: 1.8; /* 統一字距與行高，閱讀更舒壓 */
 }
 
-/* 核心樣式統一 */
-h1, h2, h3 { font-weight: 700; letter-spacing: 2px; }
-p { font-weight: 400; letter-spacing: 1px; }
+/* 星火背景 */
+body::before{
+  content:'';
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(255,140,0,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 60%, rgba(192,57,43,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 90%, rgba(201,168,76,0.06) 0%, transparent 50%);
+}
 
 /* 進度條 */
 #prog{position:fixed;top:0;left:0;z-index:1000;height:3px;width:0%;background:linear-gradient(to right,var(--red),var(--bright-gold),var(--orange));}
@@ -62,138 +67,363 @@ p { font-weight: 400; letter-spacing: 1px; }
 /* 滾動動畫 */
 .reveal{opacity:0;transform:translateY(50px);transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1),transform 0.8s cubic-bezier(0.22,1,0.36,1);}
 .reveal.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:0.1s;}.d2{transition-delay:0.2s;}.d3{transition-delay:0.3s;}.d4{transition-delay:0.4s;}
 
-/* ── HERO 區塊優化 ── */
+/* ── HERO ── */
 .hero{
   min-height:100vh;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:100px 24px 60px;text-align:center;position:relative;
+  padding:80px 24px 60px;text-align:center;position:relative;overflow:hidden;
 }
+.fire-ring{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(ellipse at center,rgba(255,140,0,0.06) 0%,transparent 70%);
+  animation:ring-pulse 4s ease-in-out infinite;pointer-events:none;
+}
+@keyframes ring-pulse{0%,100%{transform:translate(-50%,-50%) scale(1);}50%{transform:translate(-50%,-50%) scale(1.15);}}
+
 .hero-badge{
   display:inline-block;
   background:linear-gradient(135deg,var(--red),var(--orange));
   padding:6px 20px;font-size:12px;letter-spacing:5px;font-weight:700;
   clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);
   margin-bottom:28px;
+  animation:badge-in 0.7s 0.2s cubic-bezier(0.22,1,0.36,1) both;
 }
+@keyframes badge-in{from{opacity:0;transform:scale(0.5);}to{opacity:1;transform:scale(1);}}
+
 .hero h1{
-  font-family:'Ma Shan Zheng', serif;
+  font-family:'Ma Shan Zheng',serif;
   font-size:clamp(40px,10vw,80px);
-  line-height:1.2; letter-spacing:4px;
+  line-height:1.15;letter-spacing:4px;
   background:linear-gradient(135deg,var(--bright-gold),var(--orange),var(--bright-gold));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  margin-bottom:20px;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:title-in 0.9s 0.4s cubic-bezier(0.22,1,0.36,1) both;
+  margin-bottom:12px;
 }
+@keyframes title-in{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
+
 .hero-sub{
-  font-size:16px;letter-spacing:6px;color:#aaa;
+  font-size:15px;letter-spacing:7px;color:#aaa;
   border-top:1px solid rgba(255,215,0,0.2);
   border-bottom:1px solid rgba(255,215,0,0.2);
-  padding:12px 24px;margin-bottom:32px;
+  padding:10px 24px;display:inline-block;margin:16px 0 28px;
+  animation:title-in 0.9s 0.6s both;
 }
 
-/* 影片區塊統一樣式 */
+/* 影片區塊樣式 */
 .video-section {
     width: 100%;
-    max-width: 720px;
-    margin: 0 auto 60px auto;
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+    padding: 0 24px;
 }
 .video-wrapper {
     position: relative;
     padding-bottom: 56.25%;
     height: 0;
     overflow: hidden;
-    border: 1px solid rgba(201, 168, 76, 0.3);
-    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 20px rgba(201, 168, 76, 0.2);
 }
 .video-wrapper iframe {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
-/* 三日說明區塊 */
+.date-strip{
+  display:flex;gap:12px;flex-wrap:wrap;justify-content:center;
+  animation:title-in 0.9s 0.8s both;margin-bottom:32px;
+}
+.date-chip{
+  padding:10px 20px;
+  border:1px solid rgba(255,215,0,0.3);
+  background:rgba(255,215,0,0.05);
+  font-size:14px;font-weight:700;letter-spacing:2px;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+}
+.date-chip .dc-date{color:var(--bright-gold);font-size:18px;}
+.date-chip .dc-name{color:#ccc;font-size:12px;letter-spacing:3px;}
+
+.hero-desc{
+  max-width:520px;font-size:16px;line-height:2;color:#ccc;
+  animation:title-in 0.9s 1s both;
+}
+.hero-desc strong{color:var(--bright-gold);}
+
+.scroll-cue{
+  margin-top:40px;font-size:11px;letter-spacing:5px;color:#555;
+  animation:title-in 0.9s 1.2s both,cue-bounce 2.5s 2s ease-in-out infinite;
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+}
+@keyframes cue-bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+.scroll-cue::after{content:'▼';font-size:9px;}
+
+section{padding:70px 24px;max-width:700px;margin:0 auto;}
+.sec-label{
+  font-size:11px;letter-spacing:7px;color:#555;
+  text-align:center;margin-bottom:32px;
+  display:flex;align-items:center;gap:12px;
+}
+.sec-label::before,.sec-label::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(255,215,0,0.2),transparent);}
+
 .day-card{
-  border-left:2px solid var(--gold);
-  padding:30px;margin-bottom:24px;
+  border-left:3px solid var(--gold);
+  padding:24px 28px;margin-bottom:20px;
   background:rgba(255,255,255,0.03);
-  text-align: left;
+  position:relative;
+  transition:transform 0.3s,background 0.3s;
 }
-.day-date { color: var(--gold); font-size: 14px; letter-spacing: 3px; margin-bottom: 10px; font-weight: 700; }
-.day-title { font-family: 'Ma Shan Zheng', serif; font-size: 28px; margin-bottom: 15px; color: var(--cream); }
-.day-body { color: #bbb; font-size: 16px; line-height: 1.8; }
+.day-card:hover{transform:translateX(6px);background:rgba(255,215,0,0.05);}
+.day-card.red-border{border-left-color:var(--red);}
+.day-card.orange-border{border-left-color:var(--orange);}
+.day-num{
+  font-family:'Ma Shan Zheng',serif;
+  font-size:48px;color:rgba(255,215,0,0.06);
+  position:absolute;top:10px;right:20px;line-height:1;pointer-events:none;
+}
+.day-date{font-size:13px;letter-spacing:4px;color:var(--gold);margin-bottom:8px;}
+.day-card.red-border .day-date{color:#e74c3c;}
+.day-card.orange-border .day-date{color:var(--orange);}
+.day-title{
+  font-family:'Ma Shan Zheng',serif;
+  font-size:clamp(22px,5vw,32px);margin-bottom:10px;
+}
+.day-body{font-size:15px;line-height:2;color:#aaa;}
+.day-body strong{color:var(--cream);}
 
-/* 最終 CTA 統一 */
+.statement{
+  background:linear-gradient(135deg,#0D0500,#150800);
+  padding:80px 24px;text-align:center;
+  border-top:1px solid rgba(255,215,0,0.1);
+  border-bottom:1px solid rgba(255,215,0,0.1);
+  position:relative;overflow:hidden;
+  max-width:100%;
+}
+.statement::before{
+  content:'旺';
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:'Ma Shan Zheng',serif;font-size:400px;
+  color:rgba(255,215,0,0.02);pointer-events:none;line-height:1;
+}
+.statement-inner{max-width:580px;margin:0 auto;position:relative;z-index:1;}
+.statement-inner p{
+  font-family:'Ma Shan Zheng',serif;
+  font-size:clamp(26px,6vw,46px);
+  line-height:1.8;color:var(--cream);
+}
+.statement-inner p em{color:var(--bright-gold);font-style:normal;}
+.statement-inner .cap{font-size:12px;color:#555;letter-spacing:5px;margin-top:20px;font-family:'Noto Serif TC',serif;}
+
+.list-title{
+  font-family:'Ma Shan Zheng',serif;
+  font-size:clamp(24px,5vw,36px);text-align:center;margin-bottom:28px;
+}
+.list-title em{color:var(--bright-gold);font-style:normal;}
+.prayer-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+}
+@media(max-width:480px){.prayer-grid{grid-template-columns:1fr;}}
+.prayer-item{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 16px;
+  border:1px solid rgba(255,215,0,0.1);
+  background:rgba(255,255,255,0.02);
+  font-size:14px;
+  transition:background 0.2s,border-color 0.2s;
+}
+.prayer-item:hover{background:rgba(255,215,0,0.06);border-color:rgba(255,215,0,0.3);}
+.prayer-item .tag{color:var(--bright-gold);font-size:16px;flex-shrink:0;}
+
+.cd-wrap{max-width:700px;margin:0 auto;padding:60px 24px;}
+.cd-box{
+  background:linear-gradient(135deg,var(--red),#8B0000);
+  padding:48px 24px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.cd-box::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(45deg,transparent,transparent 15px,rgba(0,0,0,0.1) 15px,rgba(0,0,0,0.1) 16px);
+}
+.cd-box .label{font-size:11px;letter-spacing:7px;color:rgba(255,255,255,0.6);margin-bottom:16px;position:relative;}
+.cd-box .big{
+  font-family:'Ma Shan Zheng',serif;
+  font-size:clamp(36px,9vw,72px);
+  color:#fff;line-height:1.2;position:relative;
+  animation:cd-shake 5s ease-in-out infinite;
+}
+@keyframes cd-shake{0%,85%,100%{transform:translateX(0);}87%{transform:translateX(-5px);}89%{transform:translateX(5px);}91%{transform:translateX(-3px);}93%{transform:translateX(3px);}}
+.cd-box .big span{color:var(--bright-gold);}
+.cd-box .sub{font-size:13px;color:rgba(255,255,255,0.5);letter-spacing:3px;margin-top:10px;position:relative;}
+.cd-alert{
+  margin-top:20px;padding:12px;
+  border:1px solid rgba(255,255,255,0.3);
+  color:#fff;font-size:14px;letter-spacing:2px;position:relative;
+  animation:cd-flash 2s ease-in-out infinite;
+}
+@keyframes cd-flash{0%,100%{border-color:rgba(255,255,255,0.3);}50%{border-color:rgba(255,255,255,0.8);}}
+
 .cta-section{
-  padding:100px 24px; text-align:center;
-  background: #0D0500;
+  background:linear-gradient(135deg,#0D0500,#1A0800);
+  padding:80px 24px;text-align:center;
+  border-top:2px solid rgba(255,215,0,0.15);
+  max-width:100%;
 }
+.cta-inner{max-width:580px;margin:0 auto;}
+.cta-ornament{font-size:20px;color:var(--gold);letter-spacing:10px;margin-bottom:20px;}
+.cta-section h2{
+  font-family:'Ma Shan Zheng',serif;
+  font-size:clamp(28px,6vw,46px);line-height:1.6;margin-bottom:20px;
+}
+.cta-section h2 em{color:var(--bright-gold);font-style:normal;}
+.cta-section p{font-size:15px;line-height:2.1;color:#aaa;margin-bottom:32px;}
+.cta-section p strong{color:var(--cream);}
 .cta-btn{
-  display:inline-block;padding:20px 60px;
+  display:inline-block;padding:18px 52px;
   background:linear-gradient(135deg,var(--red),var(--orange));
-  color:#fff; text-decoration:none; font-size:18px; font-weight:700; letter-spacing:4px;
-  box-shadow:0 10px 40px rgba(192,57,43,0.4);
+  color:#fff;font-size:17px;font-weight:700;letter-spacing:5px;
+  border:none;cursor:pointer;font-family:'Noto Serif TC',serif;
+  box-shadow:0 8px 32px rgba(192,57,43,0.5);
+  animation:btn-glow 2.5s ease-in-out infinite;
+  transition:transform 0.2s;
+  text-decoration:none;
 }
+.cta-btn:hover{transform:translateY(-4px);}
+@keyframes btn-glow{0%,100%{box-shadow:0 8px 32px rgba(192,57,43,0.5);}50%{box-shadow:0 8px 48px rgba(192,57,43,0.8);}}
+.cta-note{font-size:12px;color:#555;letter-spacing:3px;margin-top:16px;}
 
-footer{ text-align:center; padding:40px; color:#444; font-size:12px; letter-spacing:4px; }
-
+footer{
+  text-align:center;padding:32px 24px;
+  background:var(--darker);color:#333;
+  font-size:11px;letter-spacing:5px;
+  border-top:1px solid rgba(255,215,0,0.08);
+}
+footer span{color:var(--gold);}
 </style>
 </head>
 <body>
 
 <div id="prog"></div>
-<div class="top-bar">🔥 <span>五月三連爆</span> · 武財神聖誕 × 雙天赦日 · 史上最強開運月 🔥</div>
+<div class="top-bar">🔥 <span>五月能量爆發</span> · 武財神聖誕 × 雙天赦日 · 史上最強開運月 🔥</div>
 <a class="float-btn" href="https://lin.ee/rCl5T6w" target="_blank">📲 立即預約登記</a>
 
 <div class="hero">
-  <div class="hero-badge">🔥 2025年五月限定 · 史上最強套組</div>
-  <h1>五月三連爆<br>史上最強開運月</h1>
-  <p class="hero-sub">武財神聖誕 × 雙天赦日 · 全方位運勢爆發</p>
-
-  <div class="video-section reveal">
-      <div class="video-wrapper">
-          <iframe src="https://www.youtube.com/embed/3mrV8KHwatQ?si=2mYupcZyEU9X3Ztl" frameborder="0" allowfullscreen></iframe>
-      </div>
+  <div class="fire-ring"></div>
+  <div class="hero-badge">🔥 2026年五月限定 · 東方古法開運套組</div>
+  <h1>五月三連爆<br>2026最強運勢轉折</h1>
+  <p class="hero-sub">武財神聖誕 × 雙天赦日 · 全方位能量共振</p>
+  <div class="date-strip">
+    <div class="date-chip"><span class="dc-date">5 / 1</span><span class="dc-name">⚔️ 武財神聖誕</span></div>
+    <div class="date-chip"><span class="dc-date">5 / 4</span><span class="dc-name">🌟 天赦日</span></div>
+    <div class="date-chip"><span class="dc-date">5 / 20</span><span class="dc-name">🌟 天赦日</span></div>
   </div>
-
-  <p style="max-width:600px; color:#ccc;">
-    同一個月，天赦日出現<strong>兩次</strong>，加上武財神聖誕坐鎮。<br>
-    這是 2025 年能量最爆棚的一個月，請靜下心感受。
+  <p class="hero-desc">
+    同一個月份中，出現兩次<strong>天赦日</strong><br>
+    並由武財神聖誕揭開序幕——<br>
+    這不是巧合，是2026年<strong>最珍貴的能量窗口</strong> 💥
   </p>
+  <div class="scroll-cue">深度解密能量運用</div>
 </div>
 
-<section style="max-width:700px; margin:0 auto; padding:60px 24px;">
-  <div class="day-card reveal">
-    <p class="day-date">⚔️ 5月1日 · 武財神聖誕</p>
-    <h2 class="day-title">衝勁翻倍，財路大開</h2>
-    <p class="day-body">掌管事業、業績與創業，為整個五月開啟強大拼勁。</p>
-  </div>
+<div class="video-section reveal">
+    <div class="sec-label">心云老師親自解說</div>
+    <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/3mrV8KHwatQ?si=2mYupcZyEU9X3Ztl" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                allowfullscreen>
+        </iframe>
+    </div>
+</div>
 
-  <div class="day-card reveal">
-    <p class="day-date">🌟 5月4日 · 天赦日</p>
-    <h2 class="day-title">清障歸零，全面重來</h2>
-    <p class="day-body">掃除路上的阻礙，讓累積的負擔在這一天統統歸零。</p>
+<section class="days-section">
+  <div class="sec-label reveal">三階段古法引導 · 缺一不可</div>
+  <div class="day-card red-border reveal">
+    <div class="day-num">一</div>
+    <div class="day-date">⚔️ 5月1日 · 武財神聖誕</div>
+    <div class="day-title">開拓財路 · 拼勁倍增</div>
+    <div class="day-body">武財神掌管正財與拼搏能量——針對事業、業績、創業與偏財。在此日啟動，能幫助您<strong>突破現狀、財路全開</strong>，為整月運勢奠定強力開場。</div>
   </div>
-
-  <div class="day-card reveal">
-    <p class="day-date">🌟 5月20日 · 天赦日</p>
-    <h2 class="day-title">深化紮根，好運長出</h2>
-    <p class="day-body">極罕見的第二次天赦，讓財氣與好運穩定紮根成長。</p>
+  <div class="day-card reveal d1">
+    <div class="day-num">二</div>
+    <div class="day-date">🌟 5月4日 · 天赦日</div>
+    <div class="day-title">清障歸零 · 化解阻礙</div>
+    <div class="day-body">這是祈求上蒼赦免、清償宿債的日子。不論是感情糾葛、事業瓶頸或財務卡關——<strong>此日皆可歸零重來</strong>，掃除前行道路上的絆腳石。</div>
+  </div>
+  <div class="day-card orange-border reveal d2">
+    <div class="day-num">三</div>
+    <div class="day-date">🌟 5月20日 · 天赦日</div>
+    <div class="day-title">深化紮根 · 運勢生長</div>
+    <div class="day-body">同月二次天赦極為稀有。若第一次是「除舊」，第二次便是「佈新」。讓財氣、桃花與貴人運<strong>穩健紮根</strong>，讓好運的種子在命盤中茁壯成長 🌱</div>
   </div>
 </section>
 
-<div class="cta-section">
-    <h2 style="font-family:'Ma Shan Zheng', serif; font-size:36px; margin-bottom:30px;">今天留言，精準開運</h2>
-    <a class="cta-btn" href="https://lin.ee/rCl5T6w" target="_blank">📲 立即預約登記</a>
-    <p style="color:#555; margin-top:20px; font-size:12px;">名額有限，請提早預約書寫祈福文</p>
+<div class="statement">
+  <div class="statement-inner reveal">
+    <p>前段衝，<em>武財神開路</em></p>
+    <p>中段清，<em>天赦掃障礙</em></p>
+    <p>後段旺，<em>深化紮根長出來</em></p>
+    <p class="cap">三日連做 · 啟動全方位運勢共鳴</p>
+  </div>
 </div>
 
-<footer><span>✦</span> 心云 | 身心靈命理療癒 · 2025 <span>✦</span></footer>
+<section class="list-section">
+  <div class="sec-label reveal">2026 專業祈福項目</div>
+  <p class="list-title reveal">全方位<em>精準開運</em>清單</p>
+  <div class="prayer-grid">
+    <div class="prayer-item reveal d1"><span class="tag">🔖</span>財運爆發 · 日進斗金</div>
+    <div class="prayer-item reveal d2"><span class="tag">🔖</span>事業順遂 · 業績長紅</div>
+    <div class="prayer-item reveal d3"><span class="tag">🔖</span>補足財庫 · 穩定收益</div>
+    <div class="prayer-item reveal d4"><span class="tag">🔖</span>感情和合 · 桃花引動</div>
+    <div class="prayer-item reveal d1"><span class="tag">🔖</span>小人遠離 · 貴人相助</div>
+    <div class="prayer-item reveal d2"><span class="tag">🔖</span>化解阻礙 · 氣場轉運</div>
+    <div class="prayer-item reveal d3"><span class="tag">🔖</span>身體健康 · 家運亨通</div>
+    <div class="prayer-item reveal d4"><span class="tag">🔖</span>心想事成 · 願望落實</div>
+    <div class="prayer-item reveal d1"><span class="tag">🔖</span>官司化解 · 圓滿順利</div>
+    <div class="prayer-item reveal d2"><span class="tag">🔖</span>佈施迴向 · 能量清理</div>
+  </div>
+</section>
+
+<div class="cd-wrap">
+  <div class="sec-label reveal">把握窗口</div>
+  <div class="cd-box reveal">
+    <p class="label">距離開運首日</p>
+    <div class="big"><span>5月1日</span> 倒數中</div>
+    <p class="sub">錯過此窗口 · 需再等一整年</p>
+    <div class="cd-alert">⚠ 限量預約 · 每份祈福皆需精準調控 ⚠</div>
+  </div>
+</div>
+
+<div class="cta-section" id="cta">
+  <div class="cta-inner reveal">
+    <p class="cta-ornament">✦ ✦ ✦</p>
+    <h2>三日連作<br><em>開頭衝、中段清、後段旺</em><br>這是古法傳承中<br><em>極具威力的能量配置</em></h2>
+    <p>
+      並非每個人都懂得如何正確借力這三天。<br>
+      財運、感情、事業——不同的命盤，需要不同的鑰匙。<br><br>
+      <strong>立即留言，由老師為您精準開運。</strong><br>
+      需事先備辦專屬香品與書寫文疏，<strong>請務必提早預約</strong>。<br>
+      若不清楚自身五行能量屬性，請直接與我聯繫 🙏
+    </p>
+    <a class="cta-btn" href="https://lin.ee/rCl5T6w" target="_blank">📲 立即預約諮詢</a>
+    <p class="cta-note">⚑ 限量預約 · 點擊進入官方 LINE 了解詳情</p>
+  </div>
+</div>
+
+<footer><span>✦</span> 五月三連爆 · 武財神聖誕 × 雙天赦日 · © 2026 心云老師 <span>✦</span></footer>
 
 <script>
 window.addEventListener('scroll',()=>{
   const p=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100;
   document.getElementById('prog').style.width=p+'%';
 });
-const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}}),{threshold:0.1});
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}}),{threshold:0.12});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 </body>
