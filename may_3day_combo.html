@@ -81,7 +81,6 @@ body::before{
   background:radial-gradient(ellipse at center,rgba(255,140,0,0.06) 0%,transparent 70%);
   animation:ring-pulse 4s ease-in-out infinite;pointer-events:none;
 }
-@keyframes ring-pulse{0%,100%{transform:translate(-50%,-50%) scale(1);}50%{transform:translate(-50%,-50%) scale(1.15);}}
 
 .hero-badge{
   display:inline-block;
@@ -91,7 +90,6 @@ body::before{
   margin-bottom:28px;
   animation:badge-in 0.7s 0.2s cubic-bezier(0.22,1,0.36,1) both;
 }
-@keyframes badge-in{from{opacity:0;transform:scale(0.5);}to{opacity:1;transform:scale(1);}}
 
 .hero h1{
   font-family:'Ma Shan Zheng',serif;
@@ -102,7 +100,6 @@ body::before{
   animation:title-in 0.9s 0.4s cubic-bezier(0.22,1,0.36,1) both;
   margin-bottom:12px;
 }
-@keyframes title-in{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
 
 .hero-sub{
   font-size:15px;letter-spacing:7px;color:#aaa;
@@ -110,6 +107,21 @@ body::before{
   border-bottom:1px solid rgba(255,215,0,0.2);
   padding:10px 24px;display:inline-block;margin:16px 0 28px;
   animation:title-in 0.9s 0.6s both;
+}
+
+/* GIF 能量動圖樣式 */
+.gif-energy-wrap {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto 30px auto;
+    animation: title-in 0.9s 0.7s both;
+}
+.gif-energy-wrap img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%; /* 圓形呈現更有能量場感 */
+    box-shadow: 0 0 40px rgba(201,168,76,0.3);
+    border: 1px solid rgba(255, 215, 0, 0.2);
 }
 
 /* 影片區塊樣式 */
@@ -316,6 +328,11 @@ footer span{color:var(--gold);}
   <div class="hero-badge">🔥 2026年五月限定 · 東方古法開運套組</div>
   <h1>五月三連爆<br>2026最強運勢轉折</h1>
   <p class="hero-sub">武財神聖誕 × 雙天赦日 · 全方位能量共振</p>
+  
+  <div class="gif-energy-wrap">
+      <img src="one.gif" alt="開運能量動圖">
+  </div>
+
   <div class="date-strip">
     <div class="date-chip"><span class="dc-date">5 / 1</span><span class="dc-name">⚔️ 武財神聖誕</span></div>
     <div class="date-chip"><span class="dc-date">5 / 4</span><span class="dc-name">🌟 天赦日</span></div>
@@ -324,7 +341,7 @@ footer span{color:var(--gold);}
   <p class="hero-desc">
     同一個月份中，出現兩次<strong>天赦日</strong><br>
     並由武財神聖誕揭開序幕——<br>
-    這不是巧合，是2026年<strong>最珍貴的能量窗口</strong> 💥
+    這不是巧合，是2026年<strong>最珍貴的能量轉動</strong> 💥
   </p>
   <div class="scroll-cue">深度解密能量運用</div>
 </div>
@@ -347,14 +364,14 @@ footer span{color:var(--gold);}
   <div class="day-card red-border reveal">
     <div class="day-num">一</div>
     <div class="day-date">⚔️ 5月1日 · 武財神聖誕</div>
-    <div class="day-title">開拓財路 · 拼勁倍增</div>
-    <div class="day-body">武財神掌管正財與拼搏能量——針對事業、業績、創業與偏財。在此日啟動，能幫助您<strong>突破現狀、財路全開</strong>，為整月運勢奠定強力開場。</div>
+    <div class="day-title">開拓財路 · 拼勁財運倍增</div>
+    <div class="day-body">武財神掌管正財與偏財能量——針對事業、業績、創業與偏財。在此日啟動，能幫助您<strong>突破現狀、財路全開</strong>，為整月運勢奠定強力開場。</div>
   </div>
   <div class="day-card reveal d1">
     <div class="day-num">二</div>
     <div class="day-date">🌟 5月4日 · 天赦日</div>
     <div class="day-title">清障歸零 · 化解阻礙</div>
-    <div class="day-body">這是祈求上蒼赦免、清償宿債的日子。不論是感情糾葛、事業瓶頸或財務卡關——<strong>此日皆可歸零重來</strong>，掃除前行道路上的絆腳石。</div>
+    <div class="day-body">這是祈求上蒼赦免、清償宿債的日子。不論是感情糾葛、事業瓶頸或財務卡關——<strong>此日只要誠心皆可獲得赦免</strong>，掃除前行道路上的絆腳石。</div>
   </div>
   <div class="day-card orange-border reveal d2">
     <div class="day-num">三</div>
@@ -368,7 +385,7 @@ footer span{color:var(--gold);}
   <div class="statement-inner reveal">
     <p>前段衝，<em>武財神開路</em></p>
     <p>中段清，<em>天赦掃障礙</em></p>
-    <p>後段旺，<em>深化紮根長出來</em></p>
+    <p>後段旺，<em>天赦9倍能量祈福</em></p>
     <p class="cap">三日連做 · 啟動全方位運勢共鳴</p>
   </div>
 </div>
@@ -407,9 +424,9 @@ footer span{color:var(--gold);}
     <p>
       並非每個人都懂得如何正確借力這三天。<br>
       財運、感情、事業——不同的命盤，需要不同的鑰匙。<br><br>
-      <strong>立即留言，由老師為您精準開運。</strong><br>
-      需事先備辦專屬香品與書寫文疏，<strong>請務必提早預約</strong>。<br>
-      若不清楚自身五行能量屬性，請直接與我聯繫 🙏
+      <strong>立即留言，由老師為您準備開起好運。</strong><br>
+      需事先備辦專屬上等香品與祈福文，<strong>請務必提早預約</strong>。<br>
+      若不清楚自己需要哪項祈福，請直接與我聯繫 🙏
     </p>
     <a class="cta-btn" href="https://lin.ee/rCl5T6w" target="_blank">📲 立即預約諮詢</a>
     <p class="cta-note">⚑ 限量預約 · 點擊進入官方 LINE 了解詳情</p>
