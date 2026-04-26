@@ -26,7 +26,7 @@ body{
   overflow-x:hidden;
   position: relative;
 }
-/* 天庭聖光與淨化火光背景 */
+/* 背景：天庭與火光特效 */
 body::before{
   content:'';
   position:fixed;inset:0;z-index:0;pointer-events:none;
@@ -45,55 +45,52 @@ body::after{
   filter: blur(20px);
   animation: fire-drift 8s ease-in-out infinite alternate;
 }
-@keyframes absolution-pulse { 0%, 100% { opacity: 0.8; transform: scale(1); } 50% { opacity: 1; transform: scale(1.03); } }
-@keyframes fire-drift { from { transform: translate(0, 0) rotate(0deg); } to { transform: translate(10px, 15px) rotate(2deg); } }
-#prog{ position:fixed;top:0;left:0;z-index:1000;height:3px;width:0%; background:linear-gradient(to right,var(--fire-gold),var(--bright-gold),var(--fire-gold)); box-shadow: 0 0 10px var(--bright-gold); }
-.top-bar{ position:fixed;top:3px;left:0;right:0;z-index:999; background:linear-gradient(135deg,rgba(192,57,43,0.95),rgba(139,0,0,0.95)); text-align:center;padding:12px; font-size:12px;letter-spacing:5px;font-weight:700;border-bottom:1px solid rgba(255,215,0,0.2); animation:bar-pulse 2.5s ease-in-out infinite; backdrop-filter: blur(3px); }
+@keyframes absolution-pulse { 0%, 100% { opacity: 0.8; } 50% { opacity: 1; } }
+@keyframes fire-drift { from { transform: translate(0, 0); } to { transform: translate(10px, 15px); } }
+
+#prog{ position:fixed;top:0;left:0;z-index:1000;height:3px;width:0%; background:linear-gradient(to right,var(--fire-gold),var(--bright-gold),var(--fire-gold)); }
+.top-bar{ position:fixed;top:3px;left:0;right:0;z-index:999; background:linear-gradient(135deg,rgba(192,57,43,0.95),rgba(139,0,0,0.95)); text-align:center;padding:12px; font-size:12px;letter-spacing:5px;font-weight:700; border-bottom:1px solid rgba(255,215,0,0.2); animation:bar-pulse 2.5s infinite; backdrop-filter: blur(3px); }
 .top-bar span{color:var(--bright-gold);text-shadow:0 0 5px var(--bright-gold);}
-.float-btn{ position:fixed;bottom:24px;right:20px;z-index:998; background:linear-gradient(135deg,var(--red),var(--fire-gold)); color:#fff;padding:14px 22px; font-size:14px;font-weight:700;letter-spacing:2px; border:1px solid rgba(255,255,255,0.1);cursor:pointer; font-family:'Noto Serif TC',serif; box-shadow:0 6px 24px rgba(192,57,43,0.7); animation:float-up 3s ease-in-out infinite; text-decoration:none; }
-.reveal{opacity:0;transform:translateY(50px);transition:opacity 1s cubic-bezier(0.22,1,0.36,1),transform 1s cubic-bezier(0.22,1,0.36,1);}
+.float-btn{ position:fixed;bottom:24px;right:20px;z-index:998; background:linear-gradient(135deg,var(--red),var(--fire-gold)); color:#fff;padding:14px 22px; font-size:14px;font-weight:700;letter-spacing:2px; border:1px solid rgba(255,255,255,0.1); cursor:pointer; text-decoration:none; box-shadow:0 6px 24px rgba(192,57,43,0.7); animation:float-up 3s infinite; }
+@keyframes float-up{0%,100%{transform:translateY(0);}50%{transform:translateY(-7px);}}
+.reveal{opacity:0;transform:translateY(40px);transition:all 1s cubic-bezier(0.22,1,0.36,1);}
 .reveal.on{opacity:1;transform:translateY(0);}
+
 .hero, .days-section, .statement, .list-section, .cd-wrap, .cta-section, footer { position: relative; z-index: 10; }
 .hero{ min-height:100vh; display:flex;flex-direction:column;align-items:center;justify-content:center; padding:80px 24px 60px;text-align:center; }
-.hero-badge{ display:inline-block; background:linear-gradient(135deg,var(--red),var(--fire-gold)); padding:7px 22px;font-size:12px;letter-spacing:5px;font-weight:700; clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%); margin-bottom:30px; animation:badge-in 0.8s 0.2s both; border:1px solid rgba(255,255,255,0.1); }
-.hero h1{ font-family:'Ma Shan Zheng',serif; font-size:clamp(45px,11vw,90px); line-height:1.1;letter-spacing:5px; background:linear-gradient(135deg,var(--cream),var(--bright-gold),var(--fire-gold)); -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; margin-bottom:15px; }
+.hero-badge{ display:inline-block; background:linear-gradient(135deg,var(--red),var(--fire-gold)); padding:7px 22px;font-size:12px;letter-spacing:5px;font-weight:700; clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%); margin-bottom:30px; border:1px solid rgba(255,255,255,0.1); }
+.hero h1{ font-family:'Ma Shan Zheng',serif; font-size:clamp(45px,11vw,90px); line-height:1.1; background:linear-gradient(135deg,var(--cream),var(--bright-gold),var(--fire-gold)); -webkit-background-clip:text;-webkit-text-fill-color:transparent; margin-bottom:15px; }
 .hero-sub{ font-size:16px;letter-spacing:8px;color:#bbb; border-top:1px solid rgba(255,215,0,0.25); border-bottom:1px solid rgba(255,215,0,0.25); padding:12px 30px;display:inline-block;margin:18px 0 32px; background: rgba(8,4,0,0.5); }
-.gif-energy-wrap { width: 100%; max-width: 280px; margin: 0 auto 35px auto; position: relative; }
-.gif-energy-wrap img { width: 100%; height: auto; border-radius: 12px; box-shadow: 0 0 30px rgba(0,0,0,0.6); border: 1.5px solid rgba(255, 215, 0, 0.2); }
+
+/* GIF 清晰鎖定 */
+.gif-energy-wrap { width: 100%; max-width: 180px; margin: 0 auto 35px auto; }
+.gif-energy-wrap img { width: 100%; height: auto; border-radius: 8px; box-shadow: 0 0 30px rgba(0,0,0,0.6); border: 1.5px solid rgba(255, 215, 0, 0.2); }
+
 .video-section { width: 100%; max-width: 700px; margin: 0 auto 50px auto; padding: 0 24px; }
-.video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 1.5px solid rgba(201,168,76, 0.4); box-shadow: 0 0 25px rgba(201,168,76, 0.25); border-radius: 4px; background: #000; }
+.video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 1.5px solid rgba(201,168,76, 0.4); box-shadow: 0 0 25px rgba(201,168,76, 0.25); border-radius: 4px; }
 .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
 .date-strip{ display:flex;gap:15px;flex-wrap:wrap;justify-content:center; margin-bottom:35px; }
-.date-chip{ padding:12px 24px; border:1px solid rgba(255,215,0,0.35); background:rgba(8,4,0,0.7); font-size:14px;font-weight:700;letter-spacing:2px; display:flex;flex-direction:column;align-items:center;gap:5px; }
-.date-chip .dc-date{color:var(--bright-gold);font-size:20px;text-shadow:0 0 5px rgba(255,215,0,0.5);}
-.hero-desc{ max-width:540px;font-size:16px;line-height:2.1;color:#ccc; }
-.hero-desc strong{color:var(--bright-gold);font-weight:700;}
+.date-chip{ padding:12px 24px; border:1px solid rgba(255,215,0,0.35); background:rgba(8,4,0,0.7); font-size:14px; display:flex;flex-direction:column;align-items:center; }
+.date-chip .dc-date{color:var(--bright-gold);font-size:20px;}
+
 section{padding:80px 24px;max-width:700px;margin:0 auto;}
-.sec-label{ font-size:11px;letter-spacing:8px;color:#666; text-align:center;margin-bottom:40px; display:flex;align-items:center;gap:15px; }
-.sec-label::before,.sec-label::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(255,215,0,0.25),transparent);}
-.day-card{ border: 1px solid rgba(255,215,0,0.1); border-left:3px solid var(--gold); padding:26px 30px;margin-bottom:25px; background:linear-gradient(135deg, rgba(255,255,255,0.03), rgba(8,4,0,0.8)); position:relative; transition:transform 0.4s; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-.day-card.red-border{border-left-color:var(--red);}
-.day-card.orange-border{border-left-color:var(--fire-gold);}
-.day-num{ font-family:'Ma Shan Zheng',serif; font-size:56px;color:rgba(255,215,0,0.04); position:absolute;top:15px;right:25px;line-height:1;pointer-events:none; }
-.day-date{font-size:13px;letter-spacing:4px;color:var(--gold);margin-bottom:10px;font-weight:700;}
-.day-title{ font-family:'Ma Shan Zheng',serif; font-size:clamp(24px,5.5vw,34px);margin-bottom:12px; color:var(--cream); }
-.day-body{font-size:15px;line-height:2.1;color:#b8b8b8;}
-.day-body strong{color:var(--cream); font-weight:700;}
-.statement{ background:linear-gradient(135deg, #050200, #0d0500, #050200); padding:100px 24px;text-align:center; border-top:1px solid rgba(255,215,0,0.15); border-bottom:1px solid rgba(255,215,0,0.15); position:relative;overflow:hidden; max-width:100%; }
-.statement-inner{max-width:600px;margin:0 auto;position:relative;z-index:10;}
-.statement-inner p{ font-family:'Ma Shan Zheng',serif; font-size:clamp(28px,6.5vw,50px); line-height:1.7;color:var(--cream); margin-bottom:10px; }
-.statement-inner p em{color:var(--bright-gold);font-style:normal; text-shadow: 0 0 10px var(--bright-gold);}
-.list-title{ font-family:'Ma Shan Zheng',serif; font-size:clamp(26px,5.5vw,38px);text-align:center;margin-bottom:35px; color:var(--cream); }
+.day-card{ border-left:3px solid var(--gold); padding:26px 30px;margin-bottom:25px; background:rgba(255,255,255,0.03); }
+.statement{ background:linear-gradient(135deg, #050200, #0d0500, #050200); padding:100px 24px;text-align:center; border-top:1px solid rgba(255,215,0,0.15); border-bottom:1px solid rgba(255,215,0,0.15); }
 .prayer-grid{ display:grid;grid-template-columns:1fr 1fr;gap:12px; }
 @media(max-width:480px){.prayer-grid{grid-template-columns:1fr;}}
 .prayer-item{ display:flex;align-items:center;gap:15px; padding:16px 20px; border:1px solid rgba(255,215,0,0.12); background:rgba(8,4,0,0.6); font-size:14px; color:#ccc; }
+.prayer-item .tag{color:var(--fire-gold);font-size:18px;flex-shrink:0;}
+
+/* 倒數區塊 */
 .cd-wrap{max-width:700px;margin:0 auto;padding:70px 24px;}
-.cd-box{ background:linear-gradient(135deg,rgba(192,57,43,0.95),rgba(139,0,0,0.95)); padding:50px 30px;text-align:center; position:relative;overflow:hidden; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(192,57,43,0.5); }
+.cd-box{ background:linear-gradient(135deg,rgba(192,57,43,0.95),rgba(139,0,0,0.95)); padding:50px 30px;text-align:center; box-shadow: 0 10px 30px rgba(192,57,43,0.5); }
 .cd-box .big{ font-family:'Ma Shan Zheng',serif; font-size:clamp(40px,9.5vw,76px); color:#fff;line-height:1.2; animation:cd-shake 5s infinite; }
-.cta-section{ background:linear-gradient(135deg, #050200, #0f0600, #080400); padding:100px 24px;text-align:center; border-top:2px solid rgba(201,168,76, 0.3); box-shadow: inset 0 20px 50px rgba(0,0,0,0.8); }
-.cta-inner{max-width:600px;margin:0 auto;}
-.cta-btn{ display:inline-block;padding:20px 55px; background:linear-gradient(135deg,var(--red),var(--fire-gold)); color:#fff;font-size:18px;font-weight:700;letter-spacing:6px; border:1px solid rgba(255,255,255,0.1);cursor:pointer; font-family:'Noto Serif TC',serif; box-shadow:0 10px 35px rgba(192,57,43,0.6); animation:btn-glow 2.5s infinite; text-decoration:none; }
-footer{ text-align:center;padding:40px 24px; background-color:var(--darker);color:#444; font-size:11px;letter-spacing:6px; border-top:1px solid rgba(255,215,0,0.1); }
+@keyframes cd-shake{0%,85%,100%{transform:translateX(0);}87%{transform:translateX(-4px);}89%{transform:translateX(4px);}}
+
+.cta-section{ background:linear-gradient(135deg, #050200, #0f0600, #080400); padding:100px 24px;text-align:center; border-top:2px solid rgba(201,168,76, 0.3); }
+.cta-btn{ display:inline-block;padding:20px 55px; background:linear-gradient(135deg,var(--red),var(--fire-gold)); color:#fff;font-size:18px;font-weight:700;letter-spacing:6px; text-decoration:none; }
+footer{ text-align:center;padding:40px 24px; background-color:var(--darker);color:#444; font-size:11px; }
 </style>
 </head>
 <body>
@@ -118,13 +115,13 @@ footer{ text-align:center;padding:40px 24px; background-color:var(--darker);colo
   </div>
   <p class="hero-desc">
     同一個月份中，出現兩次<strong>天赦日</strong><br>
-    由聖誕能量揭開序幕，這不是巧合<br>
+    並由武財神聖誕揭開序幕，這不是巧合<br>
     是2026年<strong>最難得的運勢翻轉窗口</strong> 💥
   </p>
 </div>
 
 <div class="video-section reveal">
-    <div class="sec-label">心云老師親自解讀</div>
+    <div style="text-align:center;margin-bottom:20px;color:#666;font-size:12px;letter-spacing:5px;">心云老師親自解讀</div>
     <div class="video-wrapper">
         <iframe src="https://www.youtube.com/embed/3mrV8KHwatQ?si=2mYupcZyEU9X3Ztl" frameborder="0" allowfullscreen></iframe>
     </div>
@@ -132,48 +129,70 @@ footer{ text-align:center;padding:40px 24px; background-color:var(--darker);colo
 
 <section class="days-section">
   <div class="sec-label reveal">三階段生命導引 · 開啟好運</div>
-  <div class="day-card red-border reveal">
-    <div class="day-num">一</div>
-    <div class="day-date">⚔️ 5月1日 · 能量啟動</div>
-    <div class="day-title">喚醒財運 · 黃金萬兩</div>
-    <div class="day-body">連結武財神的行動力量——針對事業與財富磁場。在此日啟動，能幫助您<strong>讓辛苦賺下來的錢不易流失</strong>，為整月運勢增強財氣頻率。</div>
+  <div class="day-card reveal">
+    <div style="color:var(--gold);font-size:13px;margin-bottom:10px;font-weight:700;">⚔️ 5月1日 · 能量啟動</div>
+    <h3 style="font-family:'Ma Shan Zheng';font-size:28px;margin-bottom:12px;">喚醒財運 · 黃金萬兩</h3>
+    <p style="font-size:15px;line-height:2.1;color:#b8b8b8;">連結武財神的行動力量——針對事業與財富磁場。在此日啟動，能幫助您<strong>讓辛苦賺下來的錢不易流失</strong>，為整月運勢增強財氣頻率。</p>
   </div>
   <div class="day-card reveal d1">
-    <div class="day-num">二</div>
-    <div class="day-date">🌟 5月4日 · 深層淨化</div>
-    <div class="day-title">清理阻礙 · 開啟轉運</div>
-    <div class="day-body">天赦日是祈求上蒼赦免、懺悔過錯的日子。不論是情緒卡點或財務瓶頸——<strong>此日皆可突破</strong>，讓前方的路途光明。</div>
+    <div style="color:var(--gold);font-size:13px;margin-bottom:10px;font-weight:700;">🌟 5月4日 · 深層淨化</div>
+    <h3 style="font-family:'Ma Shan Zheng';font-size:28px;margin-bottom:12px;">清理阻礙 · 開啟轉運</h3>
+    <p style="font-size:15px;line-height:2.1;color:#b8b8b8;">天赦日是祈求上蒼赦免、懺悔過錯的日子。不論是情緒卡點或財務瓶頸——<strong>此日皆可突破</strong>，讓前方的路途光明。</p>
   </div>
-  <div class="day-card orange-border reveal d2">
-    <div class="day-num">三</div>
-    <div class="day-date">🌟 5月20日 · 翻轉運勢</div>
-    <div class="day-title"> 讓運勢重新up up</div>
-    <div class="day-body">同月二次天赦極為稀有。讓財氣、貴人與桃花能量<strong>風有9倍翻轉</strong>，讓人生的路更好走 🌱</div>
+  <div class="day-card reveal d2" style="border-left-color:var(--fire-gold);">
+    <div style="color:var(--fire-gold);font-size:13px;margin-bottom:10px;font-weight:700;">🌟 5月20日 · 翻轉運勢</div>
+    <h3 style="font-family:'Ma Shan Zheng';font-size:28px;margin-bottom:12px;">讓運勢重新up up</h3>
+    <p style="font-size:15px;line-height:2.1;color:#b8b8b8;">同月二次天赦極為稀有。讓財氣、貴人與桃花能量<strong>豐有9倍翻轉</strong>，讓人生的路更好走 🌱</p>
   </div>
 </section>
 
 <div class="statement">
   <div class="statement-inner reveal">
-    <p>第一波，<em>喚醒能量啟動</em></p>
-    <p>第二波，<em>掃除阻礙</em></p>
-    <p>第三波，<em>翻轉運勢</em></p>
-    <p class="cap">能量三部曲 · 啟動好運</p>
+    <p style="font-family:'Ma Shan Zheng';font-size:clamp(28px,6.5vw,50px);line-height:1.7;">第一波，<em>喚醒能量啟動</em></p>
+    <p style="font-family:'Ma Shan Zheng';font-size:clamp(28px,6.5vw,50px);line-height:1.7;">第二波，<em>掃除阻礙</em></p>
+    <p style="font-family:'Ma Shan Zheng';font-size:clamp(28px,6.5vw,50px);line-height:1.7;">第三波，<em>翻轉運勢</em></p>
+    <p style="font-size:12px;color:#777;letter-spacing:6px;margin-top:25px;">能量三部曲 · 啟動好運</p>
+  </div>
+</div>
+
+<section class="list-section">
+  <div class="sec-label reveal">2026 精準療癒清單</div>
+  <div class="prayer-grid">
+    <div class="prayer-item reveal"><span class="tag">🔖</span>財富意識覺醒 · 顯化豐盛</div>
+    <div class="prayer-item reveal d1"><span class="tag">🔖</span>事業使命連結 · 業績成長</div>
+    <div class="prayer-item reveal d2"><span class="tag">🔖</span>靈魂豐盛紮根 · 穩定基底</div>
+    <div class="prayer-item reveal d3"><span class="tag">🔖</span>關係和諧共振 · 桃花引動</div>
+    <div class="prayer-item reveal d4"><span class="tag">🔖</span>清理阻礙能量 · 貴人相助</div>
+    <div class="prayer-item reveal"><span class="tag">🔖</span>化解阻礙 · 氣場轉運</div>
+    <div class="prayer-item reveal d1"><span class="tag">🔖</span>身體健康 · 家運亨通</div>
+    <div class="prayer-item reveal d2"><span class="tag">🔖</span>心想事成 · 願望落實</div>
+    <div class="prayer-item reveal d3"><span class="tag">🔖</span>官司化解 · 圓滿順利</div>
+    <div class="prayer-item reveal d4"><span class="tag">🔖</span>佈施迴向 · 能量清理</div>
+  </div>
+</section>
+
+<div class="cd-wrap">
+  <div class="sec-label reveal">把握窗口</div>
+  <div class="cd-box reveal">
+    <p style="font-size:11px;letter-spacing:8px;color:rgba(255,255,255,0.7);margin-bottom:18px;">距離開運首日</p>
+    <div class="big"><span>5月1日</span> 倒數中</div>
+    <p style="font-size:13px;color:rgba(255,255,255,0.6);letter-spacing:4px;margin-top:12px;">錯過此窗口 · 需再等一整年</p>
   </div>
 </div>
 
 <div class="cta-section">
   <div class="cta-inner reveal">
-    <p class="cta-ornament">✦ ✦ ✦</p>
-    <h2>能量三部曲<br><em>啟動、淨化、翻轉</em><br>這是為您精準設計的<br><em>頻率提升配置</em></h2>
-    <p>
+    <p style="color:var(--gold);letter-spacing:12px;margin-bottom:25px;">✦ ✦ ✦</p>
+    <h2 style="font-family:'Ma Shan Zheng';font-size:clamp(30px,6.5vw,50px);margin-bottom:25px;">啟動、淨化、翻轉</h2>
+    <p style="font-size:16px;line-height:2.2;color:#b8b8b8;margin-bottom:35px;">
       並非每個人都懂得如何借力這三天的特殊能量。<br>
-      財富、感情、事業——您的能量，需要更好。<br><br>
+      您的能量，需要更好。<br><br>
       <strong>立即留言，由老師為您準備開啟好運。</strong><br>
       需事先備辦專屬上等香品與祈福文，<strong>請務必提早預約</strong>。<br>
       若不清楚目前你的需求，請直接與我聯繫 🙏
     </p>
     <a class="cta-btn" href="https://lin.ee/rCl5T6w" target="_blank">📲 立即預約諮詢</a>
-    <p class="cta-note">⚑ 限量預約 </p>
+    <p style="font-size:12px;color:#666;letter-spacing:4px;margin-top:20px;">⚑ 限量預約</p>
   </div>
 </div>
 
